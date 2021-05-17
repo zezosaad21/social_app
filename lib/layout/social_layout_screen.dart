@@ -7,59 +7,57 @@ import 'package:social_app/shared/style/broken_icons.dart';
 class SocialLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => SocialCubit(),
-        child: BlocConsumer<SocialCubit, SocialState>(
-          listener: (context, state) {
-            if (state is SocilaUploadpost) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UploadPost(),
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            var cuibt = SocialCubit.get(context);
-            return Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                // centerTitle: true,
-                backgroundColor: Colors.white,
-                elevation: 0.0,
-                title: Text(
-                  cuibt.titles[cuibt.currentIndex],
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.0,
-                  ),
-                ),
-                actions: [
-                  IconButton(
-                    icon: Icon(
-                      IconBroken.Notification,
-                      color: Colors.black,
-                      size: 30,
-                    ),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      IconBroken.Search,
-                      color: Colors.black,
-                      size: 30,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
+    return BlocConsumer<SocialCubit, SocialState>(
+      listener: (context, state) {
+        if (state is SocilaUploadpost) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UploadPost(),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        var cuibt = SocialCubit.get(context);
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            // centerTitle: true,
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+            title: Text(
+              cuibt.titles[cuibt.currentIndex],
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 22.0,
               ),
-              body: cuibt.screens[cuibt.currentIndex],
-              bottomNavigationBar: _buttomNavBar(context),
-            );
-          },
-        ));
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  IconBroken.Notification,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(
+                  IconBroken.Search,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          body: cuibt.screens[cuibt.currentIndex],
+          bottomNavigationBar: _buttomNavBar(context),
+        );
+      },
+    );
   }
 
   Widget _buttomNavBar(context) => BottomNavigationBar(

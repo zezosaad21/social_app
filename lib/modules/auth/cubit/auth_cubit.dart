@@ -20,6 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
             email: data.name, password: data.password)
         .then((value) {
       emit(AuthSuccessState());
+
       createUser(
         name: data.username,
         uId: value.user.uid,
@@ -29,6 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
     }).catchError((error) {
       emit(AuthErrorState());
       return error.toString();
+      print(error.toString());
     });
     return null;
   }
